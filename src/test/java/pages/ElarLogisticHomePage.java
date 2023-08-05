@@ -21,6 +21,4 @@ public class ElarLogisticHomePage {
 //    @FindBy(className = "btn-search-list")
 //    public WebElement searchButton;
 
-
-
 }
