@@ -6,6 +6,7 @@ public class smartMicrovawe {
         String str = "check";
 
         //maks
+        //maks2
         
     }
 }
