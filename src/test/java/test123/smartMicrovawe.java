@@ -5,6 +5,6 @@ public class smartMicrovawe {
         System.out.println("lol");
         String str = "check";
 
-        //lol
+        
     }
 }
