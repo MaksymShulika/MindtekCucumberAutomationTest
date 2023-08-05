@@ -3,5 +3,6 @@ package test123;
 public class smartMicrovawe {
     public static void main(String[] args) {
         System.out.println("lol");
+        String str = "check";
     }
 }
