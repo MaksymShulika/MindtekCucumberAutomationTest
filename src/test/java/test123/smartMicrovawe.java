@@ -10,5 +10,6 @@ public class smartMicrovawe {
         //maks3
         //maks4
         //maks5
+        //maks6
     }
 }
