@@ -1,0 +1,1038 @@
+[
+  {
+    "line": 2,
+    "elements": [
+      {
+        "start_timestamp": "2023-07-01T17:06:55.430Z",
+        "before": [
+          {
+            "result": {
+              "duration": 1719401100,
+              "status": "passed"
+            },
+            "match": {
+              "location": "steps.Hooks.setUp()"
+            }
+          }
+        ],
+        "line": 11,
+        "name": "Validating Porsche Price For Equipment",
+        "description": "",
+        "id": ";validating-porsche-price-for-equipment",
+        "after": [
+          {
+            "result": {
+              "duration": 193484800,
+              "status": "passed"
+            },
+            "match": {
+              "location": "steps.Hooks.tearDown()"
+            }
+          }
+        ],
+        "type": "scenario",
+        "keyword": "Scenario",
+        "steps": [
+          {
+            "result": {
+              "duration": 5173170900,
+              "status": "passed"
+            },
+            "line": 12,
+            "name": "user navigates to Porsche Car application",
+            "match": {
+              "location": "steps.PorscheAppAssignment2.user_navigates_to_porsche_car_application()"
+            },
+            "keyword": "Given "
+          },
+          {
+            "result": {
+              "duration": 8210052900,
+              "status": "passed"
+            },
+            "line": 13,
+            "name": "user stores the price and selects the model 718 Cayman",
+            "match": {
+              "arguments": [
+                {
+                  "val": "718",
+                  "offset": 44
+                }
+              ],
+              "location": "steps.PorscheAppAssignment2.user_stores_the_price_and_selects_the_model_cayman(java.lang.Integer)"
+            },
+            "keyword": "When "
+          },
+          {
+            "result": {
+              "duration": 2090415000,
+              "status": "passed"
+            },
+            "line": 14,
+            "name": "user adds Power Sport Seats (14-way) with Memory Package",
+            "match": {
+              "arguments": [
+                {
+                  "val": "14",
+                  "offset": 29
+                }
+              ],
+              "location": "steps.PorscheAppAssignment2.user_adds_power_sport_seats_way_with_memory_package(java.lang.Integer)"
+            },
+            "keyword": "And "
+          },
+          {
+            "result": {
+              "duration": 1047196200,
+              "status": "passed"
+            },
+            "line": 15,
+            "name": "user validates that Price For Equipment is added and price matches",
+            "match": {
+              "location": "steps.PorscheAppAssignment2.user_validates_that_price_for_equipment_is_added_and_price_matches()"
+            },
+            "keyword": "Then "
+          }
+        ],
+        "tags": [
+          {
+            "name": "@regression"
+          },
+          {
+            "name": "@iu"
+          },
+          {
+            "name": "@porscheCar"
+          },
+          {
+            "name": "@priceAndBasePriceWithOptions"
+          }
+        ]
+      }
+    ],
+    "name": "",
+    "description": "",
+    "id": "",
+    "keyword": "Feature",
+    "uri": "file:src/test/resources/features/PorscheCarFunctionality.feature",
+    "tags": [
+      {
+        "name": "@regression",
+        "type": "Tag",
+        "location": {
+          "line": 1,
+          "column": 1
+        }
+      },
+      {
+        "name": "@iu",
+        "type": "Tag",
+        "location": {
+          "line": 1,
+          "column": 13
+        }
+      },
+      {
+        "name": "@porscheCar",
+        "type": "Tag",
+        "location": {
+          "line": 1,
+          "column": 17
+        }
+      }
+    ]
+  },
+  {
+    "line": 2,
+    "elements": [
+      {
+        "start_timestamp": "2023-07-01T17:07:13.960Z",
+        "before": [
+          {
+            "result": {
+              "duration": 973398800,
+              "status": "passed"
+            },
+            "match": {
+              "location": "steps.Hooks.setUp()"
+            }
+          }
+        ],
+        "line": 5,
+        "name": "Validating login functionality with valid credentials",
+        "description": "",
+        "id": "validating-login-functionality;validating-login-functionality-with-valid-credentials",
+        "after": [
+          {
+            "result": {
+              "duration": 126661100,
+              "status": "passed"
+            },
+            "match": {
+              "location": "steps.Hooks.tearDown()"
+            }
+          }
+        ],
+        "type": "scenario",
+        "keyword": "Scenario",
+        "steps": [
+          {
+            "result": {
+              "duration": 570475000,
+              "status": "passed"
+            },
+            "line": 6,
+            "name": "User navigates to application",
+            "match": {
+              "location": "steps.WebOrdersSteps.user_navigates_to_application()"
+            },
+            "keyword": "Given "
+          },
+          {
+            "result": {
+              "duration": 1220738600,
+              "status": "passed"
+            },
+            "line": 7,
+            "name": "User logs in with username \"Tester\" and password \"test\"",
+            "match": {
+              "arguments": [
+                {
+                  "val": "\"Tester\"",
+                  "offset": 27
+                },
+                {
+                  "val": "\"test\"",
+                  "offset": 49
+                }
+              ],
+              "location": "steps.WebOrdersSteps.user_logs_in_with_username_and_password(java.lang.String,java.lang.String)"
+            },
+            "keyword": "When "
+          },
+          {
+            "result": {
+              "duration": 8973700,
+              "status": "passed"
+            },
+            "line": 8,
+            "name": "User is successfully logged in and lands on the homepage",
+            "match": {
+              "location": "steps.WebOrdersSteps.user_is_successfully_logged_in_and_lands_on_the_homepage()"
+            },
+            "keyword": "Then "
+          }
+        ],
+        "tags": [
+          {
+            "name": "@regression"
+          },
+          {
+            "name": "@ui"
+          },
+          {
+            "name": "@smoke"
+          },
+          {
+            "name": "@loginPositive"
+          },
+          {
+            "name": "@WB-70"
+          }
+        ]
+      },
+      {
+        "start_timestamp": "2023-07-01T17:07:16.872Z",
+        "before": [
+          {
+            "result": {
+              "duration": 965419300,
+              "status": "passed"
+            },
+            "match": {
+              "location": "steps.Hooks.setUp()"
+            }
+          }
+        ],
+        "line": 11,
+        "name": "Validating login functionality with invalid credentials",
+        "description": "",
+        "id": "validating-login-functionality;validating-login-functionality-with-invalid-credentials",
+        "after": [
+          {
+            "result": {
+              "duration": 118682200,
+              "status": "passed"
+            },
+            "match": {
+              "location": "steps.Hooks.tearDown()"
+            }
+          }
+        ],
+        "type": "scenario",
+        "keyword": "Scenario",
+        "steps": [
+          {
+            "result": {
+              "duration": 375995800,
+              "status": "passed"
+            },
+            "line": 12,
+            "name": "User navigates to application",
+            "match": {
+              "location": "steps.WebOrdersSteps.user_navigates_to_application()"
+            },
+            "keyword": "Given "
+          },
+          {
+            "result": {
+              "duration": 483706300,
+              "status": "passed"
+            },
+            "line": 13,
+            "name": "User logs in with username \"test\" and password \"Tester\"",
+            "match": {
+              "arguments": [
+                {
+                  "val": "\"test\"",
+                  "offset": 27
+                },
+                {
+                  "val": "\"Tester\"",
+                  "offset": 47
+                }
+              ],
+              "location": "steps.WebOrdersSteps.user_logs_in_with_username_and_password(java.lang.String,java.lang.String)"
+            },
+            "keyword": "When "
+          },
+          {
+            "result": {
+              "duration": 49866100,
+              "status": "passed"
+            },
+            "line": 14,
+            "name": "User is validates error message \"Invalid Login or Password.\"",
+            "match": {
+              "arguments": [
+                {
+                  "val": "\"Invalid Login or Password.\"",
+                  "offset": 32
+                }
+              ],
+              "location": "steps.WebOrdersSteps.user_is_validates_error_message(java.lang.String)"
+            },
+            "keyword": "Then "
+          }
+        ],
+        "tags": [
+          {
+            "name": "@regression"
+          },
+          {
+            "name": "@ui"
+          },
+          {
+            "name": "@smoke"
+          },
+          {
+            "name": "@loginNegative"
+          },
+          {
+            "name": "@MB-70"
+          }
+        ]
+      }
+    ],
+    "name": "Validating Login Functionality",
+    "description": "",
+    "id": "validating-login-functionality",
+    "keyword": "Feature",
+    "uri": "file:src/test/resources/features/WebOrdersLogin.feature",
+    "tags": [
+      {
+        "name": "@regression",
+        "type": "Tag",
+        "location": {
+          "line": 1,
+          "column": 1
+        }
+      },
+      {
+        "name": "@ui",
+        "type": "Tag",
+        "location": {
+          "line": 1,
+          "column": 13
+        }
+      }
+    ]
+  },
+  {
+    "line": 2,
+    "elements": [
+      {
+        "line": 4,
+        "name": "Logging in",
+        "description": "",
+        "type": "background",
+        "keyword": "Background",
+        "steps": [
+          {
+            "result": {
+              "duration": 371010800,
+              "status": "passed"
+            },
+            "line": 5,
+            "name": "User navigates to application",
+            "match": {
+              "location": "steps.WebOrdersSteps.user_navigates_to_application()"
+            },
+            "keyword": "Given "
+          },
+          {
+            "result": {
+              "duration": 1225755900,
+              "status": "passed"
+            },
+            "line": 6,
+            "name": "User logs in with username \"Tester\" and password \"test\"",
+            "match": {
+              "arguments": [
+                {
+                  "val": "\"Tester\"",
+                  "offset": 27
+                },
+                {
+                  "val": "\"test\"",
+                  "offset": 49
+                }
+              ],
+              "location": "steps.WebOrdersSteps.user_logs_in_with_username_and_password(java.lang.String,java.lang.String)"
+            },
+            "keyword": "When "
+          },
+          {
+            "result": {
+              "duration": 348034600,
+              "status": "passed"
+            },
+            "line": 7,
+            "name": "User clicks on Orders tab",
+            "match": {
+              "location": "steps.WebOrdersSteps.user_clicks_on_orders_tab()"
+            },
+            "keyword": "And "
+          }
+        ]
+      },
+      {
+        "start_timestamp": "2023-07-01T17:07:18.875Z",
+        "before": [
+          {
+            "result": {
+              "duration": 1009300200,
+              "status": "passed"
+            },
+            "match": {
+              "location": "steps.Hooks.setUp()"
+            }
+          }
+        ],
+        "line": 14,
+        "name": "Validating discount calculator",
+        "description": "",
+        "id": "validating-order-creation;validating-discount-calculator;;2",
+        "after": [
+          {
+            "result": {
+              "duration": 127686800,
+              "status": "passed"
+            },
+            "match": {
+              "location": "steps.Hooks.tearDown()"
+            }
+          }
+        ],
+        "type": "scenario",
+        "keyword": "Scenario Outline",
+        "steps": [
+          {
+            "result": {
+              "duration": 227392700,
+              "status": "passed"
+            },
+            "line": 10,
+            "name": "User selects product \"MyMoney\" and enters quantity 5",
+            "match": {
+              "arguments": [
+                {
+                  "val": "\"MyMoney\"",
+                  "offset": 21
+                },
+                {
+                  "val": "5",
+                  "offset": 51
+                }
+              ],
+              "location": "steps.WebOrdersSteps.user_selects_product_and_enters_quantity(java.lang.String,java.lang.Integer)"
+            },
+            "keyword": "When "
+          },
+          {
+            "result": {
+              "duration": 67818300,
+              "status": "passed"
+            },
+            "line": 11,
+            "name": "User validates the price is correctly calculated for 5",
+            "match": {
+              "arguments": [
+                {
+                  "val": "5",
+                  "offset": 53
+                }
+              ],
+              "location": "steps.WebOrdersSteps.user_validates_the_price_is_correctly_calculated_for(java.lang.Integer)"
+            },
+            "keyword": "Then "
+          }
+        ],
+        "tags": [
+          {
+            "name": "@regre"
+          },
+          {
+            "name": "@regression"
+          },
+          {
+            "name": "@ui"
+          },
+          {
+            "name": "@webOrders"
+          },
+          {
+            "name": "@orderCreation"
+          }
+        ]
+      },
+      {
+        "line": 4,
+        "name": "Logging in",
+        "description": "",
+        "type": "background",
+        "keyword": "Background",
+        "steps": [
+          {
+            "result": {
+              "duration": 320143300,
+              "status": "passed"
+            },
+            "line": 5,
+            "name": "User navigates to application",
+            "match": {
+              "location": "steps.WebOrdersSteps.user_navigates_to_application()"
+            },
+            "keyword": "Given "
+          },
+          {
+            "result": {
+              "duration": 1069141000,
+              "status": "passed"
+            },
+            "line": 6,
+            "name": "User logs in with username \"Tester\" and password \"test\"",
+            "match": {
+              "arguments": [
+                {
+                  "val": "\"Tester\"",
+                  "offset": 27
+                },
+                {
+                  "val": "\"test\"",
+                  "offset": 49
+                }
+              ],
+              "location": "steps.WebOrdersSteps.user_logs_in_with_username_and_password(java.lang.String,java.lang.String)"
+            },
+            "keyword": "When "
+          },
+          {
+            "result": {
+              "duration": 319170800,
+              "status": "passed"
+            },
+            "line": 7,
+            "name": "User clicks on Orders tab",
+            "match": {
+              "location": "steps.WebOrdersSteps.user_clicks_on_orders_tab()"
+            },
+            "keyword": "And "
+          }
+        ]
+      },
+      {
+        "start_timestamp": "2023-07-01T17:07:22.264Z",
+        "before": [
+          {
+            "result": {
+              "duration": 936498200,
+              "status": "passed"
+            },
+            "match": {
+              "location": "steps.Hooks.setUp()"
+            }
+          }
+        ],
+        "line": 15,
+        "name": "Validating discount calculator",
+        "description": "",
+        "id": "validating-order-creation;validating-discount-calculator;;3",
+        "after": [
+          {
+            "result": {
+              "duration": 114693900,
+              "status": "passed"
+            },
+            "match": {
+              "location": "steps.Hooks.tearDown()"
+            }
+          }
+        ],
+        "type": "scenario",
+        "keyword": "Scenario Outline",
+        "steps": [
+          {
+            "result": {
+              "duration": 258285700,
+              "status": "passed"
+            },
+            "line": 10,
+            "name": "User selects product \"FamilyAlbum\" and enters quantity 10",
+            "match": {
+              "arguments": [
+                {
+                  "val": "\"FamilyAlbum\"",
+                  "offset": 21
+                },
+                {
+                  "val": "10",
+                  "offset": 55
+                }
+              ],
+              "location": "steps.WebOrdersSteps.user_selects_product_and_enters_quantity(java.lang.String,java.lang.Integer)"
+            },
+            "keyword": "When "
+          },
+          {
+            "result": {
+              "duration": 73802200,
+              "status": "passed"
+            },
+            "line": 11,
+            "name": "User validates the price is correctly calculated for 10",
+            "match": {
+              "arguments": [
+                {
+                  "val": "10",
+                  "offset": 53
+                }
+              ],
+              "location": "steps.WebOrdersSteps.user_validates_the_price_is_correctly_calculated_for(java.lang.Integer)"
+            },
+            "keyword": "Then "
+          }
+        ],
+        "tags": [
+          {
+            "name": "@regre"
+          },
+          {
+            "name": "@regression"
+          },
+          {
+            "name": "@ui"
+          },
+          {
+            "name": "@webOrders"
+          },
+          {
+            "name": "@orderCreation"
+          }
+        ]
+      },
+      {
+        "line": 4,
+        "name": "Logging in",
+        "description": "",
+        "type": "background",
+        "keyword": "Background",
+        "steps": [
+          {
+            "result": {
+              "duration": 344081500,
+              "status": "passed"
+            },
+            "line": 5,
+            "name": "User navigates to application",
+            "match": {
+              "location": "steps.WebOrdersSteps.user_navigates_to_application()"
+            },
+            "keyword": "Given "
+          },
+          {
+            "result": {
+              "duration": 1328446400,
+              "status": "passed"
+            },
+            "line": 6,
+            "name": "User logs in with username \"Tester\" and password \"test\"",
+            "match": {
+              "arguments": [
+                {
+                  "val": "\"Tester\"",
+                  "offset": 27
+                },
+                {
+                  "val": "\"test\"",
+                  "offset": 49
+                }
+              ],
+              "location": "steps.WebOrdersSteps.user_logs_in_with_username_and_password(java.lang.String,java.lang.String)"
+            },
+            "keyword": "When "
+          },
+          {
+            "result": {
+              "duration": 360038000,
+              "status": "passed"
+            },
+            "line": 7,
+            "name": "User clicks on Orders tab",
+            "match": {
+              "location": "steps.WebOrdersSteps.user_clicks_on_orders_tab()"
+            },
+            "keyword": "And "
+          }
+        ]
+      },
+      {
+        "start_timestamp": "2023-07-01T17:07:25.361Z",
+        "before": [
+          {
+            "result": {
+              "duration": 840751800,
+              "status": "passed"
+            },
+            "match": {
+              "location": "steps.Hooks.setUp()"
+            }
+          }
+        ],
+        "line": 16,
+        "name": "Validating discount calculator",
+        "description": "",
+        "id": "validating-order-creation;validating-discount-calculator;;4",
+        "after": [
+          {
+            "result": {
+              "duration": 128704100,
+              "status": "passed"
+            },
+            "match": {
+              "location": "steps.Hooks.tearDown()"
+            }
+          }
+        ],
+        "type": "scenario",
+        "keyword": "Scenario Outline",
+        "steps": [
+          {
+            "result": {
+              "duration": 241353900,
+              "status": "passed"
+            },
+            "line": 10,
+            "name": "User selects product \"ScreenSaver\" and enters quantity 15",
+            "match": {
+              "arguments": [
+                {
+                  "val": "\"ScreenSaver\"",
+                  "offset": 21
+                },
+                {
+                  "val": "15",
+                  "offset": 55
+                }
+              ],
+              "location": "steps.WebOrdersSteps.user_selects_product_and_enters_quantity(java.lang.String,java.lang.Integer)"
+            },
+            "keyword": "When "
+          },
+          {
+            "result": {
+              "duration": 65824800,
+              "status": "passed"
+            },
+            "line": 11,
+            "name": "User validates the price is correctly calculated for 15",
+            "match": {
+              "arguments": [
+                {
+                  "val": "15",
+                  "offset": 53
+                }
+              ],
+              "location": "steps.WebOrdersSteps.user_validates_the_price_is_correctly_calculated_for(java.lang.Integer)"
+            },
+            "keyword": "Then "
+          }
+        ],
+        "tags": [
+          {
+            "name": "@regre"
+          },
+          {
+            "name": "@regression"
+          },
+          {
+            "name": "@ui"
+          },
+          {
+            "name": "@webOrders"
+          },
+          {
+            "name": "@orderCreation"
+          }
+        ]
+      },
+      {
+        "line": 4,
+        "name": "Logging in",
+        "description": "",
+        "type": "background",
+        "keyword": "Background",
+        "steps": [
+          {
+            "result": {
+              "duration": 459769500,
+              "status": "passed"
+            },
+            "line": 5,
+            "name": "User navigates to application",
+            "match": {
+              "location": "steps.WebOrdersSteps.user_navigates_to_application()"
+            },
+            "keyword": "Given "
+          },
+          {
+            "result": {
+              "duration": 1105044400,
+              "status": "passed"
+            },
+            "line": 6,
+            "name": "User logs in with username \"Tester\" and password \"test\"",
+            "match": {
+              "arguments": [
+                {
+                  "val": "\"Tester\"",
+                  "offset": 27
+                },
+                {
+                  "val": "\"test\"",
+                  "offset": 49
+                }
+              ],
+              "location": "steps.WebOrdersSteps.user_logs_in_with_username_and_password(java.lang.String,java.lang.String)"
+            },
+            "keyword": "When "
+          },
+          {
+            "result": {
+              "duration": 321141600,
+              "status": "passed"
+            },
+            "line": 7,
+            "name": "User clicks on Orders tab",
+            "match": {
+              "location": "steps.WebOrdersSteps.user_clicks_on_orders_tab()"
+            },
+            "keyword": "And "
+          }
+        ]
+      },
+      {
+        "start_timestamp": "2023-07-01T17:07:28.679Z",
+        "before": [
+          {
+            "result": {
+              "duration": 882610600,
+              "status": "passed"
+            },
+            "match": {
+              "location": "steps.Hooks.setUp()"
+            }
+          }
+        ],
+        "line": 19,
+        "name": "Validating Order Creation functionality",
+        "description": "",
+        "id": "validating-order-creation;validating-order-creation-functionality",
+        "after": [
+          {
+            "result": {
+              "duration": 114692100,
+              "status": "passed"
+            },
+            "match": {
+              "location": "steps.Hooks.tearDown()"
+            }
+          }
+        ],
+        "type": "scenario",
+        "keyword": "Scenario",
+        "steps": [
+          {
+            "result": {
+              "duration": 1178848400,
+              "status": "passed"
+            },
+            "line": 20,
+            "name": "User creates order with data",
+            "match": {
+              "location": "steps.WebOrdersSteps.user_creates_order_with_data(io.cucumber.datatable.DataTable)"
+            },
+            "rows": [
+              {
+                "cells": [
+                  "PRODUCT",
+                  "QUANTITY",
+                  "CUSTOMER NAME",
+                  "STREET",
+                  "CITY",
+                  "STATE",
+                  "ZIP",
+                  "CARD",
+                  "CARD NUM",
+                  "EXP DATE"
+                ]
+              },
+              {
+                "cells": [
+                  "ScreenSaver",
+                  "5",
+                  "Jane Doe",
+                  "123 Lee St",
+                  "Boston",
+                  "Massachusetts",
+                  "12345",
+                  "VISA",
+                  "123456789",
+                  "02/25"
+                ]
+              }
+            ],
+            "keyword": "And "
+          },
+          {
+            "result": {
+              "duration": 17952600,
+              "status": "passed"
+            },
+            "line": 24,
+            "name": "User validates success message \"New order has been successfully added.\"",
+            "match": {
+              "arguments": [
+                {
+                  "val": "\"New order has been successfully added.\"",
+                  "offset": 31
+                }
+              ],
+              "location": "steps.WebOrdersSteps.user_validates_success_message(java.lang.String)"
+            },
+            "keyword": "Then "
+          },
+          {
+            "result": {
+              "duration": 487695500,
+              "status": "passed"
+            },
+            "line": 25,
+            "name": "User validates created order is in the list of all Orders",
+            "match": {
+              "location": "steps.WebOrdersSteps.user_validates_created_order_is_in_the_list_of_all_orders()"
+            },
+            "keyword": "And "
+          }
+        ],
+        "tags": [
+          {
+            "name": "@regre"
+          },
+          {
+            "name": "@regression"
+          },
+          {
+            "name": "@ui"
+          },
+          {
+            "name": "@webOrders"
+          },
+          {
+            "name": "@orderCreation"
+          },
+          {
+            "name": "@placeOrder"
+          }
+        ]
+      }
+    ],
+    "name": "Validating Order Creation",
+    "description": "",
+    "id": "validating-order-creation",
+    "keyword": "Feature",
+    "uri": "file:src/test/resources/features/WebOrdersOrderCreation.feature",
+    "tags": [
+      {
+        "name": "@regre",
+        "type": "Tag",
+        "location": {
+          "line": 1,
+          "column": 1
+        }
+      },
+      {
+        "name": "@regression",
+        "type": "Tag",
+        "location": {
+          "line": 1,
+          "column": 7
+        }
+      },
+      {
+        "name": "@ui",
+        "type": "Tag",
+        "location": {
+          "line": 1,
+          "column": 19
+        }
+      },
+      {
+        "name": "@webOrders",
+        "type": "Tag",
+        "location": {
+          "line": 1,
+          "column": 23
+        }
+      },
+      {
+        "name": "@orderCreation",
+        "type": "Tag",
+        "location": {
+          "line": 1,
+          "column": 34
+        }
+      }
+    ]
+  }
+]
