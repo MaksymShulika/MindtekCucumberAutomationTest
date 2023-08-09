@@ -95,7 +95,7 @@ public class ElarLogisticsAddCompPage {
     @FindBy(xpath = "//input[@id='id_apt_suite_company_co']")
     public WebElement id_Apt_Suit_Company;
 
-    @FindBy(xpath = "(//div[@class='block-form']//div[@input='[object Object]']//p[@class='block-form-box'])[2]")
+    @FindBy(xpath = "//div[1]//div[4]//p[2]//span[1]//span[2]//input[1]")
     public WebElement producerPhoneContactName;
 
     @FindBy(xpath = "//input[@id='id_producer_apt_suite_company_co']")
@@ -152,7 +152,7 @@ public class ElarLogisticsAddCompPage {
     @FindBy(xpath =  "//li[@class='calendar-day']//span[@class='date'][normalize-space()='3']")
     public WebElement dayFromPolicyEffectiveDay;
 
-    @FindBy(xpath =  "//span[contains(text(),'16')]")
+    @FindBy(xpath =  "//span[@class='date'][normalize-space()='16']")
     public WebElement dayFromPolicyExpiration;
 
     @FindBy(xpath = "//div[@class='success-button']//a[@class='link-cancel confirm-save'][normalize-space()='Go to list companies']")
