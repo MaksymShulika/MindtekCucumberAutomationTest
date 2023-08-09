@@ -33,12 +33,12 @@ public class JDBCTest {
 //                and any attempt to modify the data will result in an SQLException.
 //                This mode is suitable for scenarios where you only need to retrieve and display data from the database. (edited)
 
-//        resultSet.next();//one line(row) down
-//
-//        System.out.println(resultSet.getString(1));//getString(columIndex)
-//
-//        resultSet.next();
-//        System.out.println(resultSet.getString(1));
+        resultSet.next();//one line(row) down
+
+        System.out.println(resultSet.getString(1));//getString(columIndex)
+
+        resultSet.next();
+        System.out.println(resultSet.getString(1));
 
         //Steven King
 

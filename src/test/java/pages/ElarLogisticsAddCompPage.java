@@ -143,4 +143,18 @@ public class ElarLogisticsAddCompPage {
     @FindBy(xpath = "//input[@id='id_warning']")
     public WebElement warning;
 
+    @FindBy(xpath = "//div[@class='form-container']//div[3]//div[1]//p[1]//span[1]//span[1]//span[1]//input[2]")
+    public WebElement phoneExt;
+
+    @FindBy(xpath = "(//div[@input='[object Object]']//p//span//span//span//input[@class='input-form input-ext border disabled-company'])[2]")
+    public WebElement producePhoneExt;
+
+    @FindBy(xpath =  "//li[@class='calendar-day']//span[@class='date'][normalize-space()='3']")
+    public WebElement dayFromPolicyEffectiveDay;
+
+    @FindBy(xpath =  "//span[contains(text(),'16')]")
+    public WebElement dayFromPolicyExpiration;
+
+    @FindBy(xpath = "//div[@class='success-button']//a[@class='link-cancel confirm-save'][normalize-space()='Go to list companies']")
+    public WebElement bntGoToList;
 }

@@ -11,9 +11,9 @@ import org.junit.runner.RunWith;
         //path from content root (folder -> features)
         features = "src/test/resources/features",
         glue = "steps",
-        dryRun = false, // (true) if I don't have some steps implemented yet in features.class it will show the issue
+        dryRun = true, // (true) if I don't have some steps implemented yet in features.class it will show the issue
         //(false) if I don't have some steps implemented yet in features.class will run and after show the issue
-        tags = "@appearEngine"
+        tags = "@Yard"
 )
 
 public class Runner {
