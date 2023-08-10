@@ -10,6 +10,7 @@ import org.junit.Assert;
 import org.openqa.selenium.WebDriver;
 import org.openxmlformats.schemas.spreadsheetml.x2006.main.STIconSetType;
 import utillities.BrowserUtils;
+import utillities.ConfigReader;
 import utillities.Driver;
 import utillities.JDBSUtils;
 
@@ -23,7 +24,6 @@ import static io.restassured.RestAssured.given;
 
 public class YardApiSteps {
 
-    WebDriver driver = Driver.getDriver();
     Response response;
     String yardId;
 
@@ -47,7 +47,7 @@ public class YardApiSteps {
         String status = data.get("status").toString();
         String address = data.get("Address").toString();
 
-        response = given().baseUri("http://3.137.169.132/en-us/api/v2")
+        response = given().baseUri(ConfigReader.getProperty("ElarAPIBaseUri"))
                 .and().header("Authorization", "Token 9d3994dd2afd7d1d8ae9ecf4d77e45932bb210d6")
                 .and().accept("application/json")
                 .and().contentType("application/json")

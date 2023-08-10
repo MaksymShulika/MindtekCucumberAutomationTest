@@ -1,6 +1,7 @@
+@api
 Feature: Validating Yard Api calls
 
-  @YardApi
+  @YardApi @api
   Scenario: Validating POST Yard Api call
     Given user creates yard with post yard call with data
       | location | random      |

@@ -5,7 +5,6 @@ import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import org.junit.Assert;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
 import pages.*;
 import utillities.BrowserUtils;
 import utillities.ConfigReader;
@@ -29,18 +28,14 @@ ElarLogisticsListOfCompPage elarLogisticsListOfCompPage = new ElarLogisticsListO
 
 List<Map<String,Object>> data = new ArrayList<>();
 
-ResultSet resultSet;
+String uniqueMC;
 
 
     Random randNum = new Random();
     int number = randNum.nextInt(900000) + 100000;
 
-    String uniqueMcFullNumbers = number+"";
-    String companyName = "";
-    String uniqueFirstNumsMC = "";
-    String uniqueDOT = "";
 
-int i;
+    int i;
 
     @Given("User navigates to ElarLogistics application and create company")
     public void user_navigates_to_elar_logistics_application_and_create_company() {
@@ -98,9 +93,9 @@ int i;
             elarLogisticsAddCompPage.employerIdNumber.sendKeys(data.get(i).get("EMPLOYER ID NUMBER").toString());
 
 
-            companyName = data.get(i).get("NAME").toString();
-            uniqueFirstNumsMC = data.get(i).get("MC#").toString() + number;
-            uniqueDOT = data.get(i).get("DOT#").toString() + number;
+
+            uniqueMC = data.get(i).get("MC#").toString() + number;
+
 
     }
 
@@ -137,9 +132,9 @@ int i;
         elarLogisticsAddCompPage.producerEmail.sendKeys(data.get(i).get("PRODUCER EMAIL").toString());
 
 
-        elarLogisticsAddCompPage.policyEffectiveDay.click();
-        elarLogisticsAddCompPage.dayFromPolicyEffectiveDay.click();
-        elarLogisticsAddCompPage.policyEffectiveDay.click();
+        elarLogisticsAddCompPage.policyEffectiveDay.click();//open
+        elarLogisticsAddCompPage.dayFromPolicyEffectiveDay.click();//choose day
+        elarLogisticsAddCompPage.policyEffectiveDay.click();//cole
 
 
         elarLogisticsAddCompPage.policyExpiration.click();
@@ -148,14 +143,9 @@ int i;
 
         elarLogisticsAddCompPage.insuranceProdCompName.sendKeys(data.get(i).get("Type of insurance1").toString());
         BrowserUtils.selectDropdownByValue(elarLogisticsAddCompPage.automobileLiabilitySelect, data.get(i).get("Automobile liability").toString());
-
         elarLogisticsAddCompPage.numbersOfTrucksInsured.sendKeys(data.get(i).get("Numbers of trucks insured").toString());
         elarLogisticsAddCompPage.policyNumber.sendKeys(data.get(i).get("Policy number").toString());
-
-
         elarLogisticsAddCompPage.employerIdNumber.sendKeys(data.get(i).get("EMPLOYER ID NUMBER").toString());
-
-
         elarLogisticsAddCompPage.billingAddressForCheck.sendKeys(data.get(i).get("Billing address (for check)").toString());
         elarLogisticsAddCompPage.bankNameForACHPayment.sendKeys(data.get(i).get("Bank name(for ACH payment)").toString());
         elarLogisticsAddCompPage.routingNumberForACHPayment.sendKeys(data.get(i).get("Routing Number (for ACH payment)").toString());
@@ -166,10 +156,6 @@ int i;
         elarLogisticsAddCompPage.otherLicenses.sendKeys(data.get(i).get("Other licenses").toString());
         elarLogisticsAddCompPage.warning.sendKeys(data.get(i).get("Warning").toString());
         elarLogisticsAddCompPage.notes.sendKeys(data.get(i).get("NOTES").toString());
-
-        companyName = data.get(i).get("NAME").toString();
-        uniqueFirstNumsMC = data.get(i).get("MC#").toString() + number;
-        uniqueDOT = data.get(i).get("DOT#").toString() + number;
     }
 
 
@@ -180,7 +166,6 @@ int i;
         BrowserUtils.waitForElementToBeClickable(elarLogisticsAddCompPage.addCompButton);
         elarLogisticsAddCompPage.bntGoToList.click();
         Thread.sleep(20000);
-        i ++;
     }
 
     //@When("click on search btn and write company MC#{string}")
@@ -207,19 +192,100 @@ int i;
       //  }
   //  }
 
-    @Then("User will Validates all unique fields from company profile to Data Base by using Name of company and unique MC#")
-    public void user_will_validates_all_fields_from_company_profile_to_data_base() throws SQLException {
 
 
+
+
+    @Then("User will Validates all unique fields from company profile to Data Base by own fields")
+    public void user_will_validates_all_unique_fields_from_company_profile_to_data_base_by_own_fields(io.cucumber.datatable.DataTable dataTable) throws SQLException {
+        data = dataTable.asMaps(String.class,Object.class);
 
         JDBSUtils.establishConnection();
-        List<Map<String, Object>> dbData = JDBSUtils.runQuery("select * from core_company where mc_number = '" + uniqueFirstNumsMC + "'");
+        List<Map<String, Object>> dbData = JDBSUtils.runQuery("select * from core_company where mc_number = '" + uniqueMC + "'");
 
-        Assert.assertEquals(uniqueFirstNumsMC, dbData.get(0).get("mc_number"));
-        Assert.assertEquals(uniqueDOT, dbData.get(0).get("dot_number"));
-        Assert.assertEquals(companyName, dbData.get(0).get("company_name"));
-        }
+        Assert.assertEquals(data.get(i).get("NAME").toString(), dbData.get(0).get("company_name"));
+        Assert.assertEquals(data.get(i).get("COMPANY TYPE").toString(), dbData.get(0).get("company_type"));
+        Assert.assertEquals(data.get(i).get("STATUS").toString(), dbData.get(0).get("status"));
+        Assert.assertEquals(data.get(i).get("MC#").toString(), dbData.get(0).get("mc_number"));
+        Assert.assertEquals(data.get(i).get("DOT#").toString(), dbData.get(0).get("dot_number"));
+        Assert.assertEquals(data.get(i).get("IFTA").toString(), dbData.get(0).get("ifta"));
+        //Assert.assertEquals(data.get(i).get("PHONE").toString(), dbData.get(0).get("company_name")); no on DB (bag)
+        Assert.assertEquals(data.get(i).get("STREET").toString(), dbData.get(0).get("address"));
+        Assert.assertEquals(data.get(i).get("CITY").toString(), dbData.get(0).get("city"));
+        Assert.assertEquals(data.get(i).get("STATE").toString(), dbData.get(0).get("state"));
+        Assert.assertEquals(data.get(i).get("ZIP CODE").toString(), dbData.get(0).get("zip_code"));
+        //Assert.assertEquals(data.get(i).get("EMAIL").toString(), dbData.get(0).get("company_name"));
+        Assert.assertEquals(data.get(i).get("INSURANCE").toString(), dbData.get(0).get("insurance"));
+        //Assert.assertEquals(data.get(i).get("PRODUCER PHONE").toString(), dbData.get(0).get("company_name"));
+        Assert.assertEquals(data.get(i).get("PRODUCER STREET").toString(), dbData.get(0).get("producer_address"));
+        Assert.assertEquals(data.get(i).get("PRODUCER CITY").toString(), dbData.get(0).get("producer_city"));
+        Assert.assertEquals(data.get(i).get("PRODUCED STATE").toString(), dbData.get(0).get("producer_sate"));
+        Assert.assertEquals(data.get(i).get("PRODUCED ZIP CODE").toString(), dbData.get(0).get("producer_zip_code"));
+        //Assert.assertEquals(data.get(i).get("PRODUCER EMAIL").toString(), dbData.get(0).get("company_name"));
+        Assert.assertEquals(data.get(i).get("EMPLOYER ID NUMBER").toString(), dbData.get(0).get("employer_id_number"));
+//        Assert.assertEquals(data.get(i).get("OTHER LICENSES").toString(), dbData.get(0).get("company_name"));
+
     }
+
+    @Then("User will Validates all unique fields from company profile to Data Base by using all fields")
+    public void user_will_validates_all_unique_fields_from_company_profile_to_data_base_by_using_all_fields(io.cucumber.datatable.DataTable dataTable) throws SQLException {
+        data = dataTable.asMaps(String.class,Object.class);
+        JDBSUtils.establishConnection();
+        List<Map<String, Object>> dbData = JDBSUtils.runQuery("select * from core_company where mc_number = '" + uniqueMC + "'");
+
+        Assert.assertEquals(data.get(i).get("NAME").toString(), dbData.get(0).get("company_name"));
+        Assert.assertEquals(data.get(i).get("COMPANY TYPE").toString(), dbData.get(0).get("company_type"));
+        Assert.assertEquals(data.get(i).get("STATUS").toString(), dbData.get(0).get("status"));
+        Assert.assertEquals(data.get(i).get("MC#").toString(), dbData.get(0).get("mc_number"));
+        Assert.assertEquals(data.get(i).get("DOT#").toString(), dbData.get(0).get("dot_number"));
+        Assert.assertEquals(data.get(i).get("IFTA").toString(), dbData.get(0).get("ifta"));
+        //Assert.assertEquals(data.get(i).get("PHONE").toString(), dbData.get(0).get("company_name")); no on DB (bag)
+        Assert.assertEquals(data.get(i).get("STREET").toString(), dbData.get(0).get("address"));
+        Assert.assertEquals(data.get(i).get("CITY").toString(), dbData.get(0).get("city"));
+        Assert.assertEquals(data.get(i).get("STATE").toString(), dbData.get(0).get("state"));
+        Assert.assertEquals(data.get(i).get("ZIP CODE").toString(), dbData.get(0).get("zip_code"));
+        //Assert.assertEquals(data.get(i).get("EMAIL").toString(), dbData.get(0).get("company_name"));
+        Assert.assertEquals(data.get(i).get("INSURANCE").toString(), dbData.get(0).get("insurance"));
+        //Assert.assertEquals(data.get(i).get("PRODUCER PHONE").toString(), dbData.get(0).get("company_name"));
+        Assert.assertEquals(data.get(i).get("PRODUCER STREET").toString(), dbData.get(0).get("producer_address"));
+        Assert.assertEquals(data.get(i).get("PRODUCER CITY").toString(), dbData.get(0).get("producer_city"));
+        Assert.assertEquals(data.get(i).get("PRODUCED STATE").toString(), dbData.get(0).get("producer_sate"));
+        Assert.assertEquals(data.get(i).get("PRODUCED ZIP CODE").toString(), dbData.get(0).get("producer_zip_code"));
+        //Assert.assertEquals(data.get(i).get("PRODUCER EMAIL").toString(), dbData.get(0).get("company_name"));
+        Assert.assertEquals(data.get(i).get("EMPLOYER ID NUMBER").toString(), dbData.get(0).get("employer_id_number"));
+//        Assert.assertEquals(data.get(i).get("OTHER LICENSES").toString(), dbData.get(0).get("company_name"));
+
+        Assert.assertEquals(data.get(i).get("NOTES").toString(), dbData.get(0).get("employer_id_number"));
+        Assert.assertEquals(data.get(i).get("Contact name").toString(), dbData.get(0).get("employer_id_number"));
+        Assert.assertEquals(data.get(i).get("Policy effective day").toString(), dbData.get(0).get("employer_id_number"));
+        Assert.assertEquals(data.get(i).get("Policy expiration").toString(), dbData.get(0).get("employer_id_number"));
+        Assert.assertEquals(data.get(i).get("Type of insurance1").toString(), dbData.get(0).get("employer_id_number"));
+        Assert.assertEquals(data.get(i).get("Automobile liability").toString(), dbData.get(0).get("employer_id_number"));
+        Assert.assertEquals(data.get(i).get("Numbers of trucks insured").toString(), dbData.get(0).get("employer_id_number"));
+        Assert.assertEquals(data.get(i).get("Policy number").toString(), dbData.get(0).get("employer_id_number"));
+        Assert.assertEquals(data.get(i).get("Billing address (for check)").toString(), dbData.get(0).get("employer_id_number"));
+        Assert.assertEquals(data.get(i).get("Bank name(for ACH payment)").toString(), dbData.get(0).get("employer_id_number"));
+        Assert.assertEquals(data.get(i).get("Routing Number (for ACH payment)").toString(), dbData.get(0).get("employer_id_number"));
+        Assert.assertEquals(data.get(i).get("Account Number(for ACH payment)").toString(), dbData.get(0).get("employer_id_number"));
+        Assert.assertEquals(data.get(i).get("President full name").toString(), dbData.get(0).get("employer_id_number"));
+        Assert.assertEquals(data.get(i).get("Trucks in fleet").toString(), dbData.get(0).get("employer_id_number"));
+        Assert.assertEquals(data.get(i).get("SCAC code").toString(), dbData.get(0).get("employer_id_number"));
+        Assert.assertEquals(data.get(i).get("Other licenses").toString(), dbData.get(0).get("employer_id_number"));
+        Assert.assertEquals(data.get(i).get("Incorporated in").toString(), dbData.get(0).get("employer_id_number"));
+        Assert.assertEquals(data.get(i).get("Warning").toString(), dbData.get(0).get("employer_id_number"));
+        Assert.assertEquals(data.get(i).get("ContactName2").toString(), dbData.get(0).get("employer_id_number"));
+        Assert.assertEquals(data.get(i).get("Ext1").toString(), dbData.get(0).get("employer_id_number"));
+        Assert.assertEquals(data.get(i).get("ProducerPhoneExt").toString(), dbData.get(0).get("employer_id_number"));
+        Assert.assertEquals(data.get(i).get("Fax").toString(), dbData.get(0).get("employer_id_number"));
+        Assert.assertEquals(data.get(i).get("Apt1").toString(), dbData.get(0).get("employer_id_number"));
+        Assert.assertEquals(data.get(i).get("Ext2").toString(), dbData.get(0).get("employer_id_number"));
+        Assert.assertEquals(data.get(i).get("Apt2").toString(), dbData.get(0).get("employer_id_number"));
+        Assert.assertEquals(data.get(i).get("Type of insurance").toString(), dbData.get(0).get("employer_id_number"));
+
+        //http://3.137.169.132/#/login
+    }
+}
+
 
 
 
