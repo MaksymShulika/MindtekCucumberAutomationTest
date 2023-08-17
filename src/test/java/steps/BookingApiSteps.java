@@ -1,5 +1,6 @@
 package steps;
 
+import com.google.gson.Gson;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
@@ -10,6 +11,7 @@ import pojo.Booking;
 import pojo.Bookingdates;
 import utillities.ConfigReader;
 
+import java.io.Reader;
 import java.util.Map;
 
 import static io.restassured.RestAssured.given;
@@ -54,11 +56,14 @@ public class BookingApiSteps {
         bookingPayload.setTotalprice(Integer.parseInt(totalPrice));
         bookingPayload.setDepositpaid(true);
         bookingPayload.setAdditionalneeds(additionalNeeds);
-
         bookingdates.setCheckin(checkIn);
         bookingdates.setCheckout(checkout);
-
         bookingPayload.setBookingdates(bookingdates);
+
+        // SERIALIZATION
+        Gson gson = new Gson();
+        String requestPayload = gson.toJson(bookingPayload);
+        System.out.println("Request payload: " + requestPayload);
 
 
 
@@ -66,7 +71,8 @@ public class BookingApiSteps {
                .and().accept("application/json")
                .and().contentType("application/json")
                 //Body -> Java Object
-               .and().body(bookingPayload)// POJO -> Json ===> SERIALIZATION
+                .and().body(requestPayload) // do it up ===> SERIALIZATION
+               //.and().body(bookingPayload)// POJO -> Json ===> SERIALIZATION
 
                 .and().log().all()
                 .when().post("/booking");
@@ -156,8 +162,41 @@ public class BookingApiSteps {
     public void user_validates_updated_data_matches_with_response_of_get_call() {
         Booking bookingResponseBody = response.body().as(Booking.class); // Json -> POJO ===> DESERIALIZATION
 
+        Gson gson = new Gson();
+        Booking responseBody = gson.fromJson(response.body().toString(), Booking.class);
+
         Assert.assertEquals(updateData.get("firstname").toString(), bookingResponseBody.getFirstname());
         Assert.assertEquals(updateData.get("checkin").toString(), bookingResponseBody.getBookingdates().getCheckin());
         Assert.assertEquals(updateData.get("checkout").toString(), bookingResponseBody.getBookingdates().getCheckout());
     }
+
+    @When("user deletes created booking with DELETE api call")
+    public void user_deletes_created_booking_with_delete_api_call() {
+        response = given().baseUri(ConfigReader.getProperty("BookingAPIBaseUrl"))
+                .and().header("Authorization", "Basic YWRtaW46cGFzc3dvcmQxMjM=")
+                .and().log().all()//details of request
+                .when().delete("/booking/" + id);
+
+        response.then().log().all();//details of response
+    }
+
+    @When("user gets deleted booking with GET api call")
+    public void user_gets_deleted_booking_with_get_api_call() {
+        response = given().baseUri(ConfigReader.getProperty("BookingAPIBaseUrl"))
+                .and().accept("application/json")
+                .and().log().all()//details of request
+                .when().get("booking" + id);
+
+        response.then().log().all();//details of response
+    }
+
+    @When("user deletes created booking with DELETE api call without authorization token")
+    public void user_deletes_created_booking_with_delete_api_call_without_authorization_token() {
+        response = given().baseUri(ConfigReader.getProperty("BookingAPIBaseUrl"))
+                .and().log().all()
+                .when().delete("/booking/" + id);
+
+        response.then().log().all();
+    }
+
 }

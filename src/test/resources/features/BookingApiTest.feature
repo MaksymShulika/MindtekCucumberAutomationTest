@@ -36,3 +36,29 @@ Feature: Validating booking api calls
     Then user validates 200 status code
     And user validates updated data matches with response of get call
 
+    @MB8-105 @smoke @regression @api
+      Scenario: Validating DELETE booking Api call
+      Given  user creates booking with POST api call with data
+        | firstName       | Jim        |
+        | lastname        | Brown      |
+        | totalprice      | 111        |
+        | checkin         | 2023-01-01 |
+        | checkout        | 2023-02-02 |
+        | additionalneeds | Breakfast  |
+      When user deletes created booking with DELETE api call
+      And user gets deleted booking with GET api call
+      Then user validates 404 status code
+
+      @MB8-106 @smoke @regression @api
+        Scenario: Validating DELETE booking api call with no authorization token
+        Given  user creates booking with POST api call with data
+          | firstName       | Jim        |
+          | lastname        | Brown      |
+          | totalprice      | 111        |
+          | checkin         | 2023-01-01 |
+          | checkout        | 2023-02-02 |
+          | additionalneeds | Breakfast  |
+        When user deletes created booking with DELETE api call without authorization token
+        Then  user validates 403 status code
+
+
