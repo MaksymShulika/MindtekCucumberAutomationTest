@@ -71,7 +71,7 @@ public class BookingApiSteps {
                .and().accept("application/json")
                .and().contentType("application/json")
                 //Body -> Java Object
-                .and().body(requestPayload) // do it up ===> SERIALIZATION
+                .and().body(requestPayload) // do it up by Gson ===> SERIALIZATION
                //.and().body(bookingPayload)// POJO -> Json ===> SERIALIZATION
 
                 .and().log().all()

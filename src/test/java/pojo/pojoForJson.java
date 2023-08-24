@@ -3,12 +3,14 @@ package pojo;
 import lombok.Getter;
 import lombok.Setter;
 
+import java.util.List;
+
 @Setter
 @Getter
 
 public class pojoForJson {
 
-    private Integer location;
+    private String location;
     private String status;
     private String address;
     private Integer apt_suite_company_co;

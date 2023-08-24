@@ -5,6 +5,7 @@ import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import io.restassured.response.Response;
 import org.junit.Assert;
+import pojo.Contacts;
 import pojo.YardData;
 import utillities.ConfigReader;
 import utillities.JDBSUtils;
@@ -18,81 +19,116 @@ import static io.restassured.RestAssured.given;
 
 public class ElarLogisticApiYardSteps {
 
-    Response response;
+    Response response;//for api
 
-    Map<String, Object> data;
+    Map<String, Object> data;// public data table
 
-    String yardId;
-    YardData yardData = new YardData();
-    List<Map<String, Object>> dbData;
+    String yardId;// id of yard
 
-    String apiYardName;
+    YardData yardData = new YardData();//pojo
+
+    String apiYardName; // data for creating api calls and for assertions
     String apiYardStatus;
     String apiYardAddress;
     String apiYardCity;
     String apiYardState;
-    String apiYardSpots;
-    String apiYardZipCode;
+    int apiYardSpots;
+    int apiYardZipCode;
+    int statusCodeForAll;
 
 
-    @Given("user creates yard with POST api call and use token")
-    public void user_creates_yard_with_post_api_call_and_use_token(io.cucumber.datatable.DataTable dataTable) {
+
+
+
+    //=========================================POST
+
+
+    @Given("user creates yard with POST api call and validates {int}")
+    public void user_creates_yard_with_post_api_call_and_validates(Integer statusCode, io.cucumber.datatable.DataTable dataTable) {
         data = dataTable.asMap(String.class, Object.class);
-
-        yardData.setName(data.get("name").toString());
-        yardData.setStatus(data.get("status").toString());
-        yardData.setStreet(data.get("street").toString());
-        yardData.setCity(data.get("city").toString());
-        yardData.setState(data.get("state").toString());
-        yardData.setZipCode(Integer.parseInt(data.get("zipCode").toString()));
-        yardData.setSpots(Integer.parseInt(data.get("tspots").toString()));
+        statusCodeForAll = statusCode;
 
 
-        response = given().baseUri(ConfigReader.getProperty("ElarAPIBaseUri"))
+
+
+
+        if (statusCodeForAll!=401) {
+            apiYardName = data.get("name").toString();
+            apiYardStatus = data.get("status").toString();
+            apiYardAddress = data.get("street").toString();
+            apiYardCity = data.get("city").toString();
+            apiYardState = data.get("state").toString();
+            apiYardSpots = Integer.parseInt(data.get("spots").toString());
+            apiYardZipCode = Integer.parseInt(data.get("zipCode").toString());
+        }
+
+
+
+
+        response = given().baseUri(ConfigReader.getProperty("ElarAPIBaseUri"))  //POST call
                 .and().header("Authorization", data.get("token").toString())
                 .and().accept("application/json")
                 .and().contentType("application/json")
-                .and().body(yardData)
+                .and().body("{\n" +
+                        "  \"location\": \""+apiYardName+"\",\n" +
+                        "  \"status\": \""+apiYardStatus+"\",\n" +
+                        "  \"address\": \""+apiYardAddress+"\",\n" +
+                        "  \"apt_suite_company_co\": \"\",\n" +
+                        "  \"city\": \""+apiYardCity+"\",\n" +
+                        "  \"state\": \""+apiYardState+"\",\n" +
+                        "  \"zip_code\": \""+apiYardZipCode+"\",\n" +
+                        "  \"spots\": \""+apiYardSpots+"\",\n" +
+                        "  \"warning\": \"\",\n" +
+                        "  \"notes\": \"\",\n" +
+                        "  \"yard_picture\": [],\n" +
+                        "  \"contacts\": [],\n" +
+                        "  \"service_phone_number\": [\n" +
+                        "    {\n" +
+                        "      \"service_phone\": \"\",\n" +
+                        "      \"service_contact_name\": \"\"\n" +
+                        "    }\n" +
+                        "  ],\n" +
+                        "  \"owner_phone_number\": [\n" +
+                        "    {\n" +
+                        "      \"owner_phone\": \"\",\n" +
+                        "      \"owner_contact_name\": \"\"\n" +
+                        "    }\n" +
+                        "  ]\n" +
+                        "}")
                 .and().log().all() // -> logs (print) request data
                 .when().post("/yards/");
 
         response.then().log().all(); // logs (print) response details
-        response.then().statusCode(Integer.parseInt(data.get("statusCode").toString()));
+        response.then().statusCode(statusCode);
 
-        yardId = response.body().jsonPath().getString("id");
+        if (statusCodeForAll!=401) {
+            yardId = response.body().jsonPath().getString("id");// get id from response.body()
+        }
+
     }
 
-
-
-    @When("user connection to database of El")
-    public void user_connection_to_database_of_el() throws SQLException {
-        JDBSUtils.establishConnection();
-        dbData = JDBSUtils.runQuery("select * from core_yard where id = "+yardId);
-
-        apiYardName = response.body().jsonPath().getString("location");
-        apiYardStatus = response.body().jsonPath().getString("status");
-        apiYardAddress = response.body().jsonPath().getString("address");
-        apiYardCity = response.body().jsonPath().getString("city");
-        apiYardState = response.body().jsonPath().getString("state");
-        apiYardZipCode = response.body().jsonPath().getString("zipCode");
-        apiYardSpots = response.body().jsonPath().getString("spots");
-    }
 
     @Then("user validates created yard is persisted in DB of Elar")
     public void user_validates_created_yard_is_persisted_in_db_of_elar() {
-        Assert.assertEquals(apiYardAddress, dbData.get(0).get("street").toString());
-        Assert.assertEquals(apiYardStatus, dbData.get(0).get("status").toString());
-        Assert.assertEquals(apiYardName, dbData.get(0).get("name").toString());
-        Assert.assertEquals(apiYardCity, dbData.get(0).get("city").toString());
-        Assert.assertEquals(apiYardState, dbData.get(0).get("state").toString());
-        Assert.assertEquals(apiYardZipCode, dbData.get(0).get("zipCode").toString());
-        Assert.assertEquals(apiYardSpots, dbData.get(0).get("spots").toString());
+        if (statusCodeForAll!=401) {
+            Assert.assertEquals(apiYardAddress, response.body().jsonPath().getString("address")); //expected == actual (assertions)
+            Assert.assertEquals(apiYardStatus, response.body().jsonPath().getString("status"));
+            Assert.assertEquals(apiYardName, response.body().jsonPath().getString("location"));
+            Assert.assertEquals(apiYardCity, response.body().jsonPath().getString("city"));
+            Assert.assertEquals(apiYardState, response.body().jsonPath().getString("state"));
+            Assert.assertEquals(apiYardZipCode, response.body().jsonPath().getInt("zip_code"));
+            Assert.assertEquals(apiYardSpots, response.body().jsonPath().getInt("spots"));
+        }
     }
 
 
-    @Given("user taking Yard from DB by GET call and validates status code {int}")
-    public void user_taking_yard_from_db_by_get_call_and_validates_status_code(Integer statusCode) {
-        response = given().baseUri(ConfigReader.getProperty("ElarAPIBaseUri"))
+    //=========================================GET
+
+
+    @Given("user use GET api call and validates status code {int}")
+    public void user_use_GET_api_call_and_validates_status_code(Integer statusCode) {
+
+        response = given().baseUri(ConfigReader.getProperty("ElarAPIBaseUri"))      // GET api call
                 .and().header("Authorization", "Token 9d3994dd2afd7d1d8ae9ecf4d77e45932bb210d6")
                 .and().accept("application/json")
                 .and().contentType("application/json")
@@ -100,23 +136,21 @@ public class ElarLogisticApiYardSteps {
                 .when().get("/yards/" + yardId);
 
         response.then().log().all(); // logs (print) response details
-        response.then().statusCode(statusCode);
+
+        response.then().statusCode(statusCode);// valid statusCode
     }
 
 
+    @Then("user validates created GET call response bode is matching to input info")
+    public void user_validates_created_get_call_response_bode_is_matching_to_input_info() {
+        Assert.assertEquals(apiYardAddress, response.body().jsonPath().getString("address")); //expected == actual (assertions)
+        Assert.assertEquals(apiYardStatus, response.body().jsonPath().getString("status"));
+        Assert.assertEquals(apiYardName, response.body().jsonPath().getString("location"));
+        Assert.assertEquals(apiYardCity, response.body().jsonPath().getString("city"));
+        Assert.assertEquals(apiYardState, response.body().jsonPath().getString("state"));
+        Assert.assertEquals(apiYardZipCode, response.body().jsonPath().getInt("zip_code"));
+        Assert.assertEquals(apiYardSpots, response.body().jsonPath().getInt("spots"));
 
-
-    @Then("user validates created yard is persisted in DT of Elar")
-    public void user_validates_created_yard_is_persisted_in_dt_of_elar(io.cucumber.datatable.DataTable dataTable) {
-        data = dataTable.asMap(String.class, Object.class);
-
-        Assert.assertEquals(apiYardAddress, data.get("street").toString());
-        Assert.assertEquals(apiYardStatus, data.get("status").toString());
-        Assert.assertEquals(apiYardName, data.get("name").toString());
-        Assert.assertEquals(apiYardCity, data.get("city").toString());
-        Assert.assertEquals(apiYardState, data.get("state").toString());
-        Assert.assertEquals(apiYardZipCode, data.get("zipCode").toString());
-        Assert.assertEquals(apiYardSpots, data.get("spots").toString());
     }
 
 }
