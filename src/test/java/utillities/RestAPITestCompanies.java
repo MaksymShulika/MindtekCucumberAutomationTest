@@ -10,15 +10,15 @@ import static  io.restassured.RestAssured.given;
 public class RestAPITestCompanies {
 
     public static void main(String[] args){
-
         Random random = new Random();
+
         int nums = random.nextInt(900000000) + 1000000000;
 
         System.out.println("==============================================\n\n" +
                 "                    |GET|" +
                 "\n\n==============================================");
 
-        given().baseUri("http://elarbridgelogisticsmindtek.space")
+        given().baseUri("http://3.137.169.132/en-us/api/v2")
                 .and().header("Authorization", "Token 9d3994dd2afd7d1d8ae9ecf4d77e45932bb210d6")
                 .and().header("Accept", "application/json")
                 .when().get("/companies/1/")
@@ -28,7 +28,7 @@ public class RestAPITestCompanies {
                 "                    |POST|" +
                 "\n\n==============================================");
 
-        given().baseUri("http://elarbridgelogisticsmindtek.space")
+        given().baseUri("http://3.137.169.132/en-us/api/v2")
                 .and().header("Authorization", "Token 9d3994dd2afd7d1d8ae9ecf4d77e45932bb210d6")
                 .and().accept("application/json")
                 .and().contentType("application/json")
@@ -127,7 +127,7 @@ public class RestAPITestCompanies {
                 "                    |PATCH|" +
                 "\n\n==============================================");
 
-        given().baseUri("http://elarbridgelogisticsmindtek.space")
+        given().baseUri("http://3.137.169.132/en-us/api/v2")
                 .and().header("Authorization", "Token 9d3994dd2afd7d1d8ae9ecf4d77e45932bb210d6")
                 .and().accept("application/json")
                 .and().contentType("application/json")
@@ -191,7 +191,7 @@ public class RestAPITestCompanies {
                         "  \"license_name\": null,\n" +
                         "  \"logging\": {\n" +
                         "    \"count\": 24,\n" +
-                        "    \"next\": \"http://elarbridgelogisticsmindtek.space/companies/1/?limit=10&offset=10\",\n" +
+                        "    \"next\": \"http://3.137.169.132/en-us/api/v2/companies/1/?limit=10&offset=10\",\n" +
                         "    \"previous\": null,\n" +
                         "    \"results\": [\n" +
                         "      {\n" +
