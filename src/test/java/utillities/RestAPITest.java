@@ -19,7 +19,7 @@ public class RestAPITest {
          */
 
 //        Response response =
-        given().baseUri("http://3.137.169.132/en-us/api/v2")
+        given().baseUri("http://elarbridgelogisticsmindtek.space")
                 .and().header("Authorization", "Token 9d3994dd2afd7d1d8ae9ecf4d77e45932bb210d6")
                 .and().header("Accept", "application/json")
                 .when().get("/yards/10/")
@@ -40,7 +40,7 @@ public class RestAPITest {
                 1. Status code -> 201
                 2. Body -> json
          */
-        Response postResponse = given().baseUri("http://3.137.169.132/en-us/api/v2")
+        Response postResponse = given().baseUri("http://elarbridgelogisticsmindtek.space")
                 .and().header("Authorization", "Token 9d3994dd2afd7d1d8ae9ecf4d77e45932bb210d6")
                 .and().accept("application/json")
                 .and().contentType("application/json")
@@ -87,7 +87,7 @@ public class RestAPITest {
                 2. Body -> json
          */
 
-        Response updateResponse = given().baseUri("http://3.137.169.132/en-us/api/v2")
+        Response updateResponse = given().baseUri(ConfigReader.getProperty("ElarAPIBaseUri"))
                 .and().header("Authorization", "Token 9d3994dd2afd7d1d8ae9ecf4d77e45932bb210d6")
                 .and().accept("application/json")
                 .and().contentType("application/json")

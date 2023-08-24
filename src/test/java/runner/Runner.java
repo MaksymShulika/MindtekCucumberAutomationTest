@@ -13,8 +13,9 @@ import org.junit.runner.RunWith;
         glue = "steps",
         dryRun = false, // (true) if I don't have some steps implemented yet in features.class it will show the issue
         //(false) if I don't have some steps implemented yet in features.class will run and after show the issue
-        tags = "@appearEngine"
+        tags = "@Api_POST_GET"
 )
 
-public class Runner {
+public class
+Runner {
 }

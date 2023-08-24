@@ -10,4 +10,6 @@ public class SmartDetector {
 
     ///feowjefoiwjfowijfowijfwj
     //ewojfowijfoiwjfoiwjfwjfoiwif
+    //iowjefoiwjfowiejfoweijoiwfj
+    //wlofjwiopfjweoifjweojfiowej
 }
