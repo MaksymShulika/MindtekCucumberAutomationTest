@@ -15,9 +15,9 @@ public class JDBSUtils {
     public static void establishConnection() throws SQLException {
 
         connection = DriverManager.getConnection(
-                ConfigReader.getProperty("ElarDBURL"),
-                ConfigReader.getProperty("ElarDBUserName"),
-                ConfigReader.getProperty("ElarDBPassword")
+                ConfigReader.getProperty("DBURL"),
+                ConfigReader.getProperty("DBUserName"),
+                ConfigReader.getProperty("DBPassword")
         );
 
        statement = connection.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
